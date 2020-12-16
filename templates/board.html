@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Boggle{% endblock %}
+{% block content %}
+<div class="container justify-content-center">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Boggle</th>
+            </tr>
+        </thead>
+        <tbody class="container-fluid">
+            {% for row in board%}
+                <tr class="row">
+                    {% for cell in row%}
+                    <td class="col">{{cell}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <form action="/submit-guess", method="POST">
+        <label for="guess">Enter a guess</label>
+        <input type="text" name="guess" id="guess">
+        <button>Submit</button>
+    </form>
+{% endblock %}
