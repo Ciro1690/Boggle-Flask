@@ -19,9 +19,28 @@
         </tbody>
     </table>
 </div>
-    <form action="/submit-guess", method="POST">
-        <label for="guess">Enter a guess</label>
-        <input type="text" name="guess" id="guess">
+    <form method="POST" id="guess-form">
+        <input name="guess" id="guess">
         <button>Submit</button>
     </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Was my guess correct?</h2>
+                <p class="message"></p>
+            </div>
+            <div class="col">
+                <h2>Correct words</h2>
+                <p class="words"></p>
+            </div>
+            <div class="col">
+                <h2>Current score</h2>
+                <p class="score"></p>
+            </div>
+            <div class="col">
+                <h2>Time left</h2>
+                <p class="time"></p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

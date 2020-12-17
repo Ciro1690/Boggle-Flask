@@ -19,7 +19,10 @@ def display_board():
     return render_template("board.html", board=board)
 
 
-@app.route('/submit-guess', methods=["POST"])
-def handle_guess():
+@app.route('/check-word')
+def check_word():
     """Determine if word entered is valid word"""
-    return redirect('/')
+    guess = request.args["word"]
+    board = session["board"]
+    response = boggle_game.check_valid_word(board, guess)
+    return jsonify({'result': response})
