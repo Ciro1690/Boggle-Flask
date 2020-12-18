@@ -1,46 +1,47 @@
 {% extends 'base.html' %}
 {% block title %}Boggle{% endblock %}
 {% block content %}
-<div class="container justify-content-center">
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>Boggle</th>
-            </tr>
-        </thead>
-        <tbody class="container-fluid">
-            {% for row in board%}
-                <tr class="row">
-                    {% for cell in row%}
-                    <td class="col">{{cell}}</td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-    <form method="POST" id="guess-form">
-        <input name="guess" id="guess">
-        <button>Submit</button>
-    </form>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2>Was my guess correct?</h2>
-                <p class="message"></p>
-            </div>
-            <div class="col">
-                <h2>Correct words</h2>
-                <p class="words"></p>
-            </div>
-            <div class="col">
-                <h2>Current score</h2>
-                <p class="score"></p>
-            </div>
-            <div class="col">
-                <h2>Time left</h2>
-                <p class="time"></p>
-            </div>
+<div class="container-fluid m-5">
+    <h1>Boggle</h1>
+    <button class="newgame">New Game</button>
+    <div class="row">
+        <table class="col-4 table">
+            <tbody>
+                {% for row in board%}
+                    <tr>
+                        {% for cell in row%}
+                        <td class="cell border border-primary">{{cell}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="col-2">
+            <form method="POST" id="guess-form">
+                <label for="guess">Guess a word</label>
+                <input name="guess" id="guess">
+                <button>Submit</button>
+            </form>
+        </div>
+        <div class="col-2">
+            <h3>Time left</h3>
+            <p class="time"></p>
+        </div>
+        <div class="col-2">
+            <h3>Correct words</h3>
+            <p class="words"></p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-2">
+            <h3>Current score</h3>
+            <p class="score"></p>
+        </div>
+        <div class="col-2">
+            <h3>Was my guess correct?</h3>
+            <p class="message"></p>
+        </div>
+    </div>
+        <h2 class="alert"></h2>
+</div>
 {% endblock %}

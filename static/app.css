@@ -1,0 +1,12 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: rgb(242, 223, 223);
+    border: 8px solid blue;
+}
+
+tr td {
+    color: blue;
+    font-size: 40px;
+    font-weight: 900;
+}
