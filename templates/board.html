@@ -3,45 +3,41 @@
 {% block content %}
 <div class="container-fluid m-5">
     <h1>Boggle</h1>
+    <h2 class="alert">Thanks for playing!</h2>
     <button class="newgame">New Game</button>
     <div class="row">
         <table class="col-4 table">
-            <tbody>
-                {% for row in board%}
-                    <tr>
-                        {% for cell in row%}
-                        <td class="cell border border-primary">{{cell}}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
+            <tbody id="tbody"></tbody>
         </table>
-        <div class="col-2">
-            <form method="POST" id="guess-form">
-                <label for="guess">Guess a word</label>
-                <input name="guess" id="guess">
-                <button>Submit</button>
-            </form>
-        </div>
-        <div class="col-2">
-            <h3>Time left</h3>
-            <p class="time"></p>
-        </div>
-        <div class="col-2">
-            <h3>Correct words</h3>
-            <p class="words"></p>
+        <div class="col-8">
+            <div class="row m-5">
+                <div class="col-4">
+                    <h3>Time left</h3>
+                    <p class="time"></p>
+                </div>
+                <div class="col-4">
+                    <h3>Current score</h3>
+                    <p class="score"></p>
+                </div>
+                <div class="col-4">
+                    <h3>Was my guess correct?</h3>
+                    <p class="message">We'll see!</p>
+                </div>
+            </div>
+            <div class="row m-5">
+                <div class="col-6">
+                    <form method="POST" id="guess-form">
+                        <label for="guess">Guess a word</label>
+                        <input name="guess" id="guess">
+                        <button>Submit</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <h3>Correct words</h3>
+                    <p class="words"></p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-2">
-            <h3>Current score</h3>
-            <p class="score"></p>
-        </div>
-        <div class="col-2">
-            <h3>Was my guess correct?</h3>
-            <p class="message"></p>
-        </div>
-    </div>
-        <h2 class="alert"></h2>
 </div>
 {% endblock %}

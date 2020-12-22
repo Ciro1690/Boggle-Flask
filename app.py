@@ -10,14 +10,18 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 boggle_game = Boggle()
 
+
 @app.route('/')
 def display_board():
     """Display game board"""
+    session['high-score'] = 0
+    return render_template("board.html")
+
+@app.route('/newgame')
+def new_board():
     board = boggle_game.make_board()
     session['board'] = board
-    session['high-score'] = 0
-    return render_template("board.html", board=board)
-
+    return jsonify({'board': board})
 
 @app.route('/check-word')
 def check_word():
@@ -29,6 +33,7 @@ def check_word():
 
 @app.route('/high-score')
 def high_score():
+    """Test if score from game beats high score and update high score accordingly"""
     score = request.args["score"]
     if (int(score) > session['high-score']):
         session['high-score'] = int(score)

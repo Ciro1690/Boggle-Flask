@@ -5,6 +5,7 @@ const score = document.querySelector('.score')
 const time = document.querySelector('.time')
 const input = document.querySelector('#guess')
 const alert = document.querySelector('.alert')
+const tbody = document.querySelector('#tbody')
 
 let plays = 0
 let correct_words = []
@@ -17,16 +18,35 @@ time.innerHTML = "0:" + time_left / 1000;
 const newgame = document.querySelector('.newgame')
 newgame.addEventListener('click', startGame)
 
-function startGame() {
+async function startGame() {
     newgame.removeEventListener('click', startGame)
     current_score = 0
     correct_words = []
     time_left = 60000
     score.innerHTML = current_score
     time.innerHTML = "0:" + time_left / 1000;
-    alert.innerHTML = ""
     guess_form.addEventListener('submit', handleSubmit)
+    words.innerHTML = ""
+    const new_board = await axios.get('/newgame');
+    console.log(new_board.data['board'])
+    tbody.innerHTML = ''
+    fillBoard(new_board.data['board'])
+    alert.innerHTML = 'Thanks for playing!'
     Timer()
+}
+
+function fillBoard(board) {
+    for (let row of board) {
+        const tr = document.createElement('tr')
+        for (let cell of row) {
+            console.log(cell)
+            const td = document.createElement('td')
+            td.innerHTML = cell
+            td.classList = "cell border border-primary"
+            tr.append(td)
+        }
+        tbody.append(tr)
+    }
 }
 
 function endGame() {
@@ -35,7 +55,7 @@ function endGame() {
     plays++
     let score_promise = getHighScore()
     score_promise.then(high_score =>
-        alert.innerHTML = `Game over, your score was ${current_score}, high score is ${high_score}, number of plays is ${plays}`);
+        alert.innerHTML = `Game over! Score: ${current_score}, High Score: ${high_score}, Plays: ${plays}`);
 }
 
 function Timer() {
